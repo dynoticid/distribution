@@ -17,10 +17,12 @@
     overflow-y: auto;
     scroll-behavior: smooth;
 
-    /* Gradient full-page langsung di body */
     background: linear-gradient(160deg,#3b0764,#6d28d9,#7e22ce);
     background-size: 400% 400%;
     animation: aurora 15s ease-in-out infinite;
+
+    background-attachment: fixed;
+    overscroll-behavior: none;
   }
 
   @keyframes aurora {
@@ -29,7 +31,6 @@
     100%{background-position:0% 50%;}
   }
 
-  /* Header */
   header {
     width:100%; position:fixed; top:0; left:0; z-index:100;
     display:flex; justify-content:space-between; align-items:center;
@@ -38,11 +39,6 @@
     border-bottom:1px solid rgba(255,255,255,0.15);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    will-change: transform, backdrop-filter;
   }
 
   .logo { font-size:1.4rem; font-weight:700; color:#fff; letter-spacing:0.5px; }
@@ -53,45 +49,51 @@
   }
   .menu-icon.active { transform:rotate(90deg); }
 
-  /* Dropdown */
   .dropdown {
     position:fixed; top:0; right:-280px; height:100vh; width:260px;
-    background: rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    border-left:1px solid rgba(255,255,255,0.2);
     box-shadow: -4px 0 25px rgba(0,0,0,0.3);
-    backdrop-filter: blur(20px); display:flex; flex-direction:column;
+    backdrop-filter: blur(20px);
+    display:flex; flex-direction:column;
     justify-content:center; align-items:start; padding-left:25px;
-    transition:right 0.35s cubic-bezier(0.77,0,0.175,1); z-index:99;
-
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    will-change: transform, backdrop-filter;
+    transition:right 0.35s cubic-bezier(0.77,0,0.175,1);
+    z-index:99;
   }
   .dropdown.show { right:0; }
   .dropdown a {
-    display:block; text-decoration:none; color:#fff; font-size:1rem; font-weight:500;
-    margin:10px 0; padding:10px 0; width:100%; border-bottom:1px solid rgba(255,255,255,0.08);
+    display:block; text-decoration:none; color:#fff;
+    font-size:1rem; font-weight:500;
+    margin:10px 0; padding:10px 0; width:100%;
+    border-bottom:1px solid rgba(255,255,255,0.08);
     transition: all 0.25s ease;
   }
-  .dropdown a:hover { color:#c4b5fd; padding-left:8px; background: rgba(255,255,255,0.05); }
+  .dropdown a:hover {
+    color:#c4b5fd; padding-left:8px;
+    background: rgba(255,255,255,0.05);
+  }
 
-  /* Hero */
+  /* HERO */
   .hero {
-    min-height:100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
     display:flex; justify-content:center; align-items:center;
     text-align:center; padding:0 10%; padding-top:70px;
   }
   .hero h2 {
-    font-size:clamp(1rem,3.5vw,1.3rem); font-weight:500;
-    color:#f3e8ff; line-height:1.8; max-width:850px;
+    font-size:clamp(1rem,3.5vw,1.3rem);
+    font-weight:500; color:#f3e8ff; line-height:1.8; max-width:850px;
     text-shadow:0 0 10px rgba(0,0,0,0.2);
   }
 
-  /* Sections */
-  .section-container { width:90%; margin:50px auto; display:flex; flex-direction:column; gap:25px; }
+  .section-container {
+    width:90%; margin:50px auto;
+    display:flex; flex-direction:column; gap:25px;
+  }
   section {
-    background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1);
-    border-radius:18px; padding:30px 25px; transition: all 0.3s ease;
+    background: rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:18px; padding:30px 25px;
+    transition: all 0.3s ease;
     backdrop-filter: blur(8px);
   }
   section:hover {
@@ -100,13 +102,20 @@
     border-color: rgba(255,255,255,0.15);
     background: rgba(255,255,255,0.12);
   }
-  section h2 { font-size:clamp(1.2rem,3.5vw,1.7rem); margin-bottom:10px; color:#c4b5fd; }
-  section p { font-size:clamp(0.88rem,2.5vw,1rem); color:#fefcff; }
+  section h2 {
+    font-size:clamp(1.2rem,3.5vw,1.7rem);
+    margin-bottom:10px; color:#c4b5fd;
+  }
+  section p {
+    font-size:clamp(0.88rem,2.5vw,1rem);
+    color:#fefcff;
+  }
 
-  /* Footer */
-  footer { text-align:center; padding:25px 10px 60px; font-size:0.9rem; color:rgba(255,255,255,0.7); }
+  footer {
+    text-align:center; padding:25px 10px 60px;
+    font-size:0.9rem; color:rgba(255,255,255,0.7);
+  }
 
-  /* Responsive */
   @media (max-width:768px){
     .logo{font-size:1.2rem;}
     .menu-icon{font-size:1.6rem;}
@@ -187,6 +196,15 @@ document.addEventListener('click', e => {
     menuIcon.classList.remove('active');
   }
 });
+
+// FIX viewport tinggi HP
+function setFullHeight() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('load', setFullHeight);
+setFullHeight();
 </script>
 </body>
 </html>
