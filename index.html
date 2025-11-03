@@ -9,6 +9,7 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:"Outfit", sans-serif; }
 
+/* BODY & HTML */
 html, body {
   height: 100%;
   margin: 0;
@@ -17,24 +18,36 @@ html, body {
   overflow-y: auto;
   scroll-behavior: smooth;
 
-  /* fallback solid supaya nggak putih */
-  background: #3b0764;
+  /* fallback solid supaya flash putih tersamarkan */
+  background-color: #3b0764;
 
   /* gradient animasi aurora */
-  background: linear-gradient(160deg, #3b0764, #6d28d9, #7e22ce);
+  background-image: linear-gradient(160deg, #3b0764, #6d28d9, #7e22ce);
   background-size: 400% 400%;
   animation: aurora 15s ease-in-out infinite;
   background-attachment: fixed;
 
   min-height: calc(var(--vh, 1vh) * 100);
+  position: relative;
 }
 
+/* overlay pseudo-element untuk menutupi flash putih */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background: linear-gradient(160deg, #3b0764, #6d28d9, #7e22ce);
+  z-index:-1;
+}
+
+/* keyframes gradient */
 @keyframes aurora {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
 
+/* HEADER */
 header {
   width:100%; position:fixed; top:0; left:0; z-index:100;
   display:flex; justify-content:space-between; align-items:center;
@@ -43,34 +56,39 @@ header {
   border-bottom:1px solid rgba(255,255,255,0.15);
   backdrop-filter: blur(8px);
 }
-
 .logo { font-size:1.4rem; font-weight:700; color:#fff; letter-spacing:0.5px; }
 .menu-icon { font-size:1.8rem; cursor:pointer; user-select:none; transition: transform 0.3s ease, color 0.3s ease; color:#fff; text-shadow:0 0 6px rgba(255,255,255,0.25);}
 .menu-icon.active { transform:rotate(90deg); }
 
-.dropdown { position:fixed; top:0; right:-280px; height:100vh; width:260px;
+.dropdown {
+  position:fixed; top:0; right:-280px; height:100vh; width:260px;
   background: rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.2);
   box-shadow: -4px 0 25px rgba(0,0,0,0.3); backdrop-filter: blur(12px);
   display:flex; flex-direction:column; justify-content:center; align-items:start; padding-left:25px;
-  transition:right 0.35s cubic-bezier(0.77,0,0.175,1); z-index:99;}
+  transition:right 0.35s cubic-bezier(0.77,0,0.175,1); z-index:99;
+}
 .dropdown.show { right:0; }
 .dropdown a { display:block; text-decoration:none; color:#fff; font-size:1rem; font-weight:500;
   margin:10px 0; padding:10px 0; width:100%; border-bottom:1px solid rgba(255,255,255,0.08);
   transition: all 0.25s ease;}
 .dropdown a:hover { color:#c4b5fd; padding-left:8px; background: rgba(255,255,255,0.05); }
 
+/* HERO */
 .hero { min-height: calc(var(--vh, 1vh) * 100 - 70px); display:flex; justify-content:center; align-items:center;
   text-align:center; padding:0 10%; padding-top:70px;}
 .hero h2 { font-size:clamp(1rem,3.5vw,1.3rem); font-weight:500; color:#f3e8ff; line-height:1.8; max-width:850px; text-shadow:0 0 10px rgba(0,0,0,0.2); }
 
+/* SECTIONS */
 .section-container { width:90%; margin:50px auto; display:flex; flex-direction:column; gap:25px; }
 section { background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:30px 25px; transition: all 0.3s ease; backdrop-filter: blur(4px); }
 section:hover { transform: translateY(-3px); box-shadow: 0 0 15px rgba(167,139,250,0.3); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.12); }
 section h2 { font-size:clamp(1.2rem,3.5vw,1.7rem); margin-bottom:10px; color:#c4b5fd; }
 section p { font-size:clamp(0.88rem,2.5vw,1rem); color:#fefcff; }
 
+/* FOOTER */
 footer { text-align:center; padding:25px 10px 20px; font-size:0.9rem; color:rgba(255,255,255,0.7); }
 
+/* MEDIA */
 @media (max-width:768px){
   .logo{font-size:1.2rem;}
   .menu-icon{font-size:1.6rem;}
@@ -96,7 +114,7 @@ footer { text-align:center; padding:25px 10px 20px; font-size:0.9rem; color:rgba
 
 <div class="hero">
   <h2>
-    <b>Dynotic Music</b> Distribusi Musik Digital Untuk Artis, Untuk Label, dan Untuk Kreator.
+    <b>Dynotic Music</b> Distribusi Musik Digital Untuk Artis, Untuk Label, dan Kreator.
     Rilis musik Anda ke iTunes, Spotify, JOOX, TikTok, Amazon Music, Deezer, dan ratusan digital music store global lainnya dengan cepat, mudah, dan <b>GRATIS</b>.
   </h2>
 </div>
