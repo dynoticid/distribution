@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynotic Music Distribution</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"Outfit", sans-serif; }
+  html, body { height:100%; overflow-x:hidden; scroll-behavior:smooth; }
+  body::before {
+    content:"";
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(160deg,#3b0764,#6d28d9,#7e22ce);
+    background-size:400% 400%;
+    animation: aurora 15s ease-in-out infinite;
+    z-index:-2;
+  }
+  @keyframes aurora {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  header {
+    width:100%; position:fixed; top:0; left:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 6%;
+    background: rgba(255,255,255,0.12);
+    border-bottom:1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .logo { font-size:1.4rem; font-weight:700; color:#fff; letter-spacing:0.5px; }
+  .menu-icon {
+    font-size:1.8rem; cursor:pointer; user-select:none;
+    transition: transform 0.3s ease, color 0.3s ease; color:#fff;
+    text-shadow:0 0 6px rgba(255,255,255,0.25);
+  }
+  .menu-icon.active { transform:rotate(90deg); }
+  .dropdown {
+    position:fixed; top:0; right:-280px; height:100vh; width:260px;
+    background: rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.2);
+    box-shadow: -4px 0 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(20px); display:flex; flex-direction:column;
+    justify-content:center; align-items:start; padding-left:25px;
+    transition:right 0.35s cubic-bezier(0.77,0,0.175,1); z-index:99;
+  }
+  .dropdown.show { right:0; }
+  .dropdown a {
+    display:block; text-decoration:none; color:#fff; font-size:1rem; font-weight:500;
+    margin:10px 0; padding:10px 0; width:100%; border-bottom:1px solid rgba(255,255,255,0.08);
+    transition: all 0.25s ease;
+  }
+  .dropdown a:hover { color:#c4b5fd; padding-left:8px; background: rgba(255,255,255,0.05); }
+  .hero {
+    min-height:80vh; display:flex; justify-content:center; align-items:center;
+    text-align:center; padding:0 10%; margin-top:70px;
+  }
+  .hero h2 {
+    font-size:clamp(1rem,3.5vw,1.3rem); font-weight:500;
+    color:#f3e8ff; line-height:1.8; max-width:850px;
+    text-shadow:0 0 10px rgba(0,0,0,0.2);
+  }
+  .section-container { width:90%; margin:50px auto; display:flex; flex-direction:column; gap:25px; }
+  section {
+    background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1);
+    border-radius:18px; padding:30px 25px; transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+  }
+  section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(167,139,250,0.4);
+    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.12);
+  }
+  section h2 { font-size:clamp(1.2rem,3.5vw,1.7rem); margin-bottom:10px; color:#c4b5fd; }
+  section p { font-size:clamp(0.88rem,2.5vw,1rem); color:#fefcff; }
+  footer { text-align:center; padding:25px 10px 60px; font-size:0.9rem; color:rgba(255,255,255,0.7); }
+  @media (max-width:768px){
+    .logo{font-size:1.2rem;}
+    .menu-icon{font-size:1.6rem;}
+    .hero{margin-top:70px;padding:0 7%;}
+    .dropdown{width:230px;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Dynotic ID</div>
+  <div class="menu-icon" id="menuIcon">☰</div>
+</header>
+
+<div class="dropdown" id="dropdownMenu">
+  <a href="https://dynoticid.github.io/home/">Register</a>
+  <a href="https://dynoticid.github.io/panel/">Release</a>
+  <a href="https://dynoticid.github.io/home">Catalog</a>
+  <a href="https://dynoticid.github.io/home/">Smartlink</a>
+  <a href="https://dynoticid.github.io/home/">OAC Request</a>
+</div>
+
+<div class="hero">
+  <h2>
+    <b>Dynotic Music</b> Distribusi Musik Digital Untuk Artis, Untuk Label, dan Untuk Kreator.
+    Rilis musik Anda ke iTunes, Spotify, JOOX, TikTok, Amazon Music, Deezer, dan ratusan digital music store global lainnya dengan cepat, mudah, dan <b>GRATIS</b>.
+  </h2>
+</div>
+
+<div class="section-container">
+  <section>
+    <h2>Services</h2>
+    <p>• Distribusi Musik ke DSP Global (Spotify, Apple Music, YouTube, dll).<br>
+       • Sistem royalti otomatis.<br>
+       • Manajemen artis dan label.<br>
+       • Dukungan promosi & rilis eksklusif.</p>
+  </section>
+
+  <section>
+    <h2>About</h2>
+    <p>Dynotic adalah komunitas & label musik digital yang berfokus pada pengembangan artis independen. Kami percaya musik adalah kebebasan dan setiap karya layak untuk terdengar.</p>
+  </section>
+
+  <section>
+    <h2>Platforms DSPs</h2>
+    <p>Dynotic bekerja sama dengan platform besar seperti Spotify, Apple Music, YouTube Music, Deezer, TikTok, dan banyak lagi.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <p>Temukan panduan lengkap tentang upload, rilis, dan pengelolaan lagu di menu bantuan kami.<br>Butuh bantuan? Hubungi kami di menu Contact.</p>
+  </section>
+
+  <section>
+    <h2>Privacy Policy</h2>
+    <p>Kami menjaga keamanan data pengguna dan tidak membagikan informasi pribadi ke pihak ketiga tanpa izin.</p>
+  </section>
+
+  <section>
+    <h2>Contact Us</h2>
+    <p>Email: dynoticmusic@gmail.com<br>
+       Instagram: @dynoticmusic.id</p>
+  </section>
+</div>
+
+<footer>© 2025 Dynotic ID</footer>
+
+<script>
+const menuIcon = document.getElementById('menuIcon');
+const dropdownMenu = document.getElementById('dropdownMenu');
+menuIcon.addEventListener('click', () => {
+  menuIcon.classList.toggle('active');
+  dropdownMenu.classList.toggle('show');
+});
+document.addEventListener('click', e => {
+  if(!menuIcon.contains(e.target) && !dropdownMenu.contains(e.target)){
+    dropdownMenu.classList.remove('show');
+    menuIcon.classList.remove('active');
+  }
+});
+</script>
+</body>
+</html>
