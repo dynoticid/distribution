@@ -10,13 +10,13 @@
 
 html, body {
   height: 100%;
-  min-height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  overflow-y: auto; /* penting biar browser pull-to-refresh aktif */
+  overflow-y: auto;
   scroll-behavior: smooth;
   background: linear-gradient(160deg,#3b0764,#6d28d9,#7e22ce);
+  min-height: calc(var(--vh, 1vh) * 100); /* fix ruang kosong mobile */
 }
 
 header {
@@ -43,7 +43,7 @@ header {
   transition: all 0.25s ease;}
 .dropdown a:hover { color:#c4b5fd; padding-left:8px; background: rgba(255,255,255,0.05); }
 
-.hero { min-height: calc(var(--vh, 1vh) * 100); display:flex; justify-content:center; align-items:center;
+.hero { min-height: calc(var(--vh, 1vh) * 100 - 70px); display:flex; justify-content:center; align-items:center;
   text-align:center; padding:0 10%; padding-top:70px;}
 .hero h2 { font-size:clamp(1rem,3.5vw,1.3rem); font-weight:500; color:#f3e8ff; line-height:1.8; max-width:850px; text-shadow:0 0 10px rgba(0,0,0,0.2); }
 
@@ -53,7 +53,7 @@ section:hover { transform: translateY(-3px); box-shadow: 0 0 15px rgba(167,139,2
 section h2 { font-size:clamp(1.2rem,3.5vw,1.7rem); margin-bottom:10px; color:#c4b5fd; }
 section p { font-size:clamp(0.88rem,2.5vw,1rem); color:#fefcff; }
 
-footer { text-align:center; padding:25px 10px 60px; font-size:0.9rem; color:rgba(255,255,255,0.7); }
+footer { text-align:center; padding:25px 10px 20px; font-size:0.9rem; color:rgba(255,255,255,0.7); }
 
 @media (max-width:768px){
   .logo{font-size:1.2rem;}
