@@ -3,183 +3,194 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dynotic Music Distribution</title>
-<meta name="theme-color" content="#3b0764">
+<title>Dynotic Artists</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:"Outfit", sans-serif; }
-
-/* BODY & HTML */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-
-  /* fallback solid supaya flash putih tersamarkan */
-  background-color: #3b0764;
-
-  /* gradient animasi aurora */
-  background-image: linear-gradient(160deg, #3b0764, #6d28d9, #7e22ce);
-  background-size: 400% 400%;
-  animation: aurora 15s ease-in-out infinite;
-  background-attachment: fixed;
-
-  min-height: calc(var(--vh, 1vh) * 100);
-  position: relative;
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Outfit",sans-serif;}
+html,body{
+  height:100%;
+  width:100%;
+  background:linear-gradient(160deg,#3b0764,#6d28d9,#7e22ce);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  color:#f5f3ff;
+  overflow-x:hidden;
 }
-
-/* overlay pseudo-element untuk menutupi flash putih */
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background: linear-gradient(160deg, #3b0764, #6d28d9, #7e22ce);
-  z-index:-1;
+h1{
+  margin:25px 0;
+  font-size:clamp(2rem,6vw,3rem);
+  text-align:center;
+  text-shadow:0 0 10px rgba(0,0,0,0.25);
 }
-
-/* keyframes gradient */
-@keyframes aurora {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+.search-box{
+  width:90%;
+  max-width:420px;
+  border-radius:18px;
+  padding:12px 18px;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.2);
+  box-shadow:0 0 8px rgba(0,0,0,0.15);
+  margin-bottom:20px;
+  transition:all 0.3s ease;
 }
-
-/* HEADER */
-header {
-  width:100%; position:fixed; top:0; left:0; z-index:100;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:10px 6%;
-  background: rgba(255,255,255,0.12);
-  border-bottom:1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(8px);
+.search-box input{
+  width:100%;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:#fff;
+  font-size:1rem;
+  padding:8px 0;
 }
-.logo { font-size:1.4rem; font-weight:700; color:#fff; letter-spacing:0.5px; }
-.menu-icon { font-size:1.8rem; cursor:pointer; user-select:none; transition: transform 0.3s ease, color 0.3s ease; color:#fff; text-shadow:0 0 6px rgba(255,255,255,0.25);}
-.menu-icon.active { transform:rotate(90deg); }
-
-.dropdown {
-  position:fixed; top:0; right:-280px; height:100vh; width:260px;
-  background: rgba(255,255,255,0.08); border-left:1px solid rgba(255,255,255,0.2);
-  box-shadow: -4px 0 25px rgba(0,0,0,0.3); backdrop-filter: blur(12px);
-  display:flex; flex-direction:column; justify-content:center; align-items:start; padding-left:25px;
-  transition:right 0.35s cubic-bezier(0.77,0,0.175,1); z-index:99;
+.list-container{
+  width:90%;
+  max-width:420px;
+  flex-grow:1;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
 }
-.dropdown.show { right:0; }
-.dropdown a { display:block; text-decoration:none; color:#fff; font-size:1rem; font-weight:500;
-  margin:10px 0; padding:10px 0; width:100%; border-bottom:1px solid rgba(255,255,255,0.08);
-  transition: all 0.25s ease;}
-.dropdown a:hover { color:#c4b5fd; padding-left:8px; background: rgba(255,255,255,0.05); }
-
-/* HERO */
-.hero { min-height: calc(var(--vh, 1vh) * 100 - 70px); display:flex; justify-content:center; align-items:center;
-  text-align:center; padding:0 10%; padding-top:70px;}
-.hero h2 { font-size:clamp(1rem,3.5vw,1.3rem); font-weight:500; color:#f3e8ff; line-height:1.8; max-width:850px; text-shadow:0 0 10px rgba(0,0,0,0.2); }
-
-/* SECTIONS */
-.section-container { width:90%; margin:50px auto; display:flex; flex-direction:column; gap:25px; }
-section { background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:30px 25px; transition: all 0.3s ease; backdrop-filter: blur(4px); }
-section:hover { transform: translateY(-3px); box-shadow: 0 0 15px rgba(167,139,250,0.3); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.12); }
-section h2 { font-size:clamp(1.2rem,3.5vw,1.7rem); margin-bottom:10px; color:#c4b5fd; }
-section p { font-size:clamp(0.88rem,2.5vw,1rem); color:#fefcff; }
-
-/* FOOTER */
-footer { text-align:center; padding:25px 10px 20px; font-size:0.9rem; color:rgba(255,255,255,0.7); }
-
-/* MEDIA */
-@media (max-width:768px){
-  .logo{font-size:1.2rem;}
-  .menu-icon{font-size:1.6rem;}
-  .hero{padding:0 7%; padding-top:70px;}
-  .dropdown{width:230px;}
+ul{list-style:none;padding:0;margin:0;}
+li{
+  height:50px;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.15);
+  font-weight:600;
+  margin-bottom:8px;
+  transition:background 0.25s ease;
+}
+li:hover{
+  background:rgba(255,255,255,0.2);
+}
+li a{text-decoration:none;color:#fff;width:100%;display:block;}
+li mark{
+  background:rgba(196,181,253,0.5);
+  border-radius:4px;
+  color:#fff;
+}
+.no-result{
+  text-align:center;
+  margin-top:20px;
+  color:#f0a;
+  display:none;
+}
+.pagination{
+  display:flex;
+  gap:10px;
+  margin:15px 0;
+}
+.pagination button{
+  padding:8px 14px;
+  border:none;
+  border-radius:8px;
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition:all 0.25s ease;
+}
+.pagination button:hover{
+  background:rgba(255,255,255,0.25);
+}
+.pagination button:disabled{
+  opacity:0.4;
+  cursor:not-allowed;
+}
+footer{
+  padding:15px 10px;
+  font-size:0.85rem;
+  color: rgba(255,255,255,0.6);
+  text-align:center;
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">Dynotic ID</div>
-  <div class="menu-icon" id="menuIcon">☰</div>
-</header>
-
-<div class="dropdown" id="dropdownMenu">
-  <a href="https://dynoticid.github.io/home/">Register</a>
-  <a href="https://dynoticid.github.io/panel/">Release</a>
-  <a href="https://dynoticid.github.io/home">Catalog</a>
-  <a href="https://dynoticid.github.io/smartlink/">Smartlink</a>
-  <a href="https://dynoticid.github.io/home/">OAC Request</a>
+<h1>Search Your Artist</h1>
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Cari nama artis...">
 </div>
 
-<div class="hero">
-  <h2>
-    <b>Dynotic Music</b> Distribusi Musik Digital Untuk Artis, Untuk Label, dan Kreator.
-    Rilis musik Anda ke iTunes, Spotify, JOOX, TikTok, Amazon Music, Deezer, dan ratusan digital music store global lainnya dengan cepat, mudah, dan <b>GRATIS</b>.
-  </h2>
+<div class="list-container">
+  <ul id="artistList"></ul>
 </div>
+<p class="no-result" id="noResult">Artis tidak ditemukan.</p>
 
-<div class="section-container">
-  <section>
-    <h2>Services</h2>
-    <p>• Distribusi Musik ke DSP Global (Spotify, Apple Music, YouTube, dll).<br>
-       • Sistem royalti otomatis.<br>
-       • Manajemen artis dan label.<br>
-       • Dukungan promosi & rilis eksklusif.</p>
-  </section>
-
-  <section>
-    <h2>About</h2>
-    <p>Dynotic adalah komunitas & label musik digital yang berfokus pada pengembangan artis independen. Kami percaya musik adalah kebebasan dan setiap karya layak untuk terdengar.</p>
-  </section>
-
-  <section>
-    <h2>Platforms DSPs</h2>
-    <p>Dynotic bekerja sama dengan platform besar seperti Spotify, Apple Music, YouTube Music, Deezer, TikTok, dan banyak lagi.</p>
-  </section>
-
-  <section>
-    <h2>FAQ</h2>
-    <p>Temukan panduan lengkap tentang upload, rilis, dan pengelolaan lagu di menu bantuan kami.<br>Butuh bantuan? Hubungi kami di menu Contact.</p>
-  </section>
-
-  <section>
-    <h2>Privacy Policy</h2>
-    <p>Kami menjaga keamanan data pengguna dan tidak membagikan informasi pribadi ke pihak ketiga tanpa izin.</p>
-  </section>
-
-  <section>
-    <h2>Contact Us</h2>
-    <p>Email: dynoticmusic@gmail.com<br>
-       Instagram: @dynoticmusic.id</p>
-  </section>
+<div class="pagination">
+  <button id="prevBtn">Previous</button>
+  <button id="nextBtn">Next</button>
 </div>
 
 <footer>© 2025 Dynotic ID</footer>
 
 <script>
-// Dropdown menu
-const menuIcon = document.getElementById('menuIcon');
-const dropdownMenu = document.getElementById('dropdownMenu');
-menuIcon.addEventListener('click', () => {
-  menuIcon.classList.toggle('active');
-  dropdownMenu.classList.toggle('show');
-});
-document.addEventListener('click', e => {
-  if(!menuIcon.contains(e.target) && !dropdownMenu.contains(e.target)){
-    dropdownMenu.classList.remove('show');
-    menuIcon.classList.remove('active');
-  }
+let artists = [
+"ABIL Tramaker","ALFIN FVNKY","Ayuz Fvnky","Bngnil Porects","Derill Nine",
+"Darna Fvnky","Darna Gvnby","FEBRI DTM","Ganz Neverdie","HAMXZTEEN",
+"Hndra SOPAN","ILHAM RMX SG","Ilham Sopan Rmx","Itsme Ilham","Itsmeards",
+"Iyanz`Wolf","Riski Sumatra","Refan SFX","Shraa NeverDIE","SRVLR RMX",
+"SUKAPARTY","XDYNZ","ZANVIR","ZallETM","Zanrmx","Zan Fvnky Rmx","gfrxP",
+"heyDarryl","It'smefajar","i5vR",
+];
+
+artists.sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));
+
+const itemsPerPage = 10;
+let currentPage = 1;
+let filteredArtists = [...artists];
+
+const artistList = document.getElementById('artistList');
+const searchInput = document.getElementById('searchInput');
+const noResult = document.getElementById('noResult');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+function renderArtists(){
+  artistList.innerHTML = '';
+  const start = (currentPage-1)*itemsPerPage;
+  const end = start + itemsPerPage;
+  const pageItems = filteredArtists.slice(start,end);
+
+  noResult.style.display = pageItems.length===0 ? 'block' : 'none';
+
+  pageItems.forEach(name=>{
+    const li = document.createElement('li');
+    // Link khusus
+    let link = "https://dynoticid.github.io/home/";
+    if(name === "Darna Gvnby") link = "https://dynoticid.github.io/darnagvndylink/";
+    if(name === "ABIL Tramaker") link = "https://dynoticid.github.io/abilstarlink/";
+    if(name === "ALFIN FVNKY") link = "https://dynoticid.github.io/alfinsmartlink/";
+    li.innerHTML = `<a href="${link}" target="_blank">${name}</a>`;
+    artistList.appendChild(li);
+  });
+
+  prevBtn.disabled = currentPage===1;
+  nextBtn.disabled = currentPage>=Math.ceil(filteredArtists.length/itemsPerPage);
+}
+
+let searchTimeout;
+searchInput.addEventListener('input',()=>{
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(()=>{
+    const query = searchInput.value.toLowerCase();
+    filteredArtists = artists.filter(a=>a.toLowerCase().includes(query));
+    currentPage=1;
+    renderArtists();
+  },150);
 });
 
-// FIX viewport tinggi HP
-function setFullHeight() {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-window.addEventListener('resize', setFullHeight);
-window.addEventListener('load', setFullHeight);
-setFullHeight();
+prevBtn.addEventListener('click',()=>{
+  if(currentPage>1){currentPage--;renderArtists();}
+});
+nextBtn.addEventListener('click',()=>{
+  if(currentPage<Math.ceil(filteredArtists.length/itemsPerPage)){currentPage++;renderArtists();}
+});
+
+renderArtists();
 </script>
 
 </body>
